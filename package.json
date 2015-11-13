@@ -1,0 +1,28 @@
+{
+  "name": "verbix",
+  "version": "0.0.1",
+  "description": "Conjugate in many languages with verbix.com.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "verbix",
+    "conjugate",
+    "conjugation",
+    "language",
+    "nlp",
+    "spanish",
+    "french",
+    "portuguese",
+    "italian",
+    "german",
+    "english"
+  ],
+  "author": "Björn Westergard",
+  "license": "Public Domain",
+  "dependencies": {
+    "htmlparser2": "^3.8.3",
+    "ramda": "^0.18.0"
+  }
+}
