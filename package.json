@@ -22,7 +22,11 @@
   "author": "Björn Westergard",
   "license": "Public Domain",
   "dependencies": {
+    "html-entities": "^1.2.0",
     "htmlparser2": "^3.8.3",
     "ramda": "^0.18.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.3"
   }
 }
