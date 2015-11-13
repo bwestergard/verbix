@@ -6,6 +6,8 @@ Conjugate verbs in a variety of languages. Screenscrapes [verbix.com](http://ver
 [![Circle CI](https://circleci.com/gh/bwestergard/verbix/tree/master.svg?style=svg)](https://circleci.com/gh/bwestergard/verbix/tree/master)
 [![npm version](https://badge.fury.io/js/verbix.svg)](https://badge.fury.io/js/verbix)
 [![dependencies](https://david-dm.org/bwestergard/verbix.svg)](https://david-dm.org/bwestergard/verbix)
+[![js-standard-style](https://cdn.rawgit.com/bwestergard/verbix/master/badge.svg)](https://github.com/bwestergard/verbix)
+
 
 Usage
 ------
