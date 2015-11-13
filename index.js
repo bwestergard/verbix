@@ -117,13 +117,14 @@ var summarizeMoodTable = function (el) {
   var getTenseTables = R.pipe(
     getChildren,
     recursiveElSearch(tenseElPredicate)
-  );  
+  );
 
   return R.assoc(
     extractTitle(el),
     R.pipe(
       getTenseTables,
-      R.map(summarizeTenseTable)
+      R.map(summarizeTenseTable),
+      R.reduce(R.merge, {})
     )(el),
     {}
   );
