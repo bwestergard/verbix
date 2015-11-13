@@ -101,21 +101,37 @@ var summarizeTenseTable = function (el) {
   return R.assoc(extractTitle(el), getPronounConjugationMap(el), {});
 };
 
-var tenseElPredicate = R.pipe(
+var moodElPredicate = R.pipe(
   R.path(['attribs', 'class']),
   // Totally magic string
   R.equals('pure-u-1-1 pure-u-lg-1-2')
 );
 
-domFromHtml(moodHtml)./*.then(
-  R.pipe(
-    R.head,
-    extractTenseTables,    
-    R.map(summarizeTenseTable),
-    R.reduce(R.merge, {})
-  )
-)*/
+var tenseElPredicate = R.pipe(
+  R.path(['attribs', 'class']),
+  // Totally magic string
+  R.equals('pure-u-1-2')
+);
+
+var summarizeMoodTable = function (el) {
+  var getTenseTables = R.pipe(
+    getChildren,
+    recursiveElSearch(tenseElPredicate)
+  );  
+
+  return R.assoc(
+    extractTitle(el),
+    R.pipe(
+      getTenseTables,
+      R.map(summarizeTenseTable)
+    )(el),
+    {}
+  );
+};
+
+domFromHtml(moodHtml).
 then(R.head).
-then(summarizeTenseTable).
+then(summarizeMoodTable).
+then(R.curry(JSON.stringify)(R.__, null, 2)).
 then(console.log);
 
