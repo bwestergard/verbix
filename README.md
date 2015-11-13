@@ -1,7 +1,7 @@
 Verbix
 =============
 
-Conjugate verbs in a variety of languages. Screenscrapes [verbix.com](http://verbix.com), a wonderful volunteer-maintained resource you should consider [contributing to](http://www.verbix.com/webverbix/donate.html).
+Conjugate verbs in a variety of languages. The next best thing to a proper API, this module screenscrapes [verbix.com](http://verbix.com), a wonderful volunteer-maintained resource you should consider [contributing to](http://www.verbix.com/webverbix/donate.html).
 
 [![Circle CI](https://circleci.com/gh/bwestergard/verbix/tree/master.svg?style=svg)](https://circleci.com/gh/bwestergard/verbix/tree/master)
 [![npm version](https://badge.fury.io/js/verbix.svg)](https://badge.fury.io/js/verbix)

@@ -25,8 +25,10 @@
   "author": "Björn Westergard",
   "license": "Public Domain",
   "dependencies": {
+    "bluebird": "^3.0.5",
     "html-entities": "^1.2.0",
     "htmlparser2": "^3.8.3",
+    "http-as-promised": "^1.1.0",
     "ramda": "^0.18.0"
   },
   "devDependencies": {
