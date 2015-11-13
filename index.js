@@ -11,13 +11,13 @@ var extractTitle = R.pipe(
   getChildren,
   R.find(
     R.pipe(
-      R.prop('name'),
+      R.propOr('', 'name'),
       R.contains(R.__, ['h1', 'h2','h3'])
     )
   ),
   getChildren,
   R.find(R.propEq('type','text')),
-  R.prop('data'),
+  R.propOr('','data'),
   function (t) {
     return t.replace(/\s+/g, '_');
   },
@@ -65,7 +65,7 @@ var extractTextFromSpan = R.pipe(
   getChildren,
   // A text element is the span's only child
   R.head,
-  R.prop('data'),
+  R.propOr('','data'),
   R.trim
 );
 
@@ -119,20 +119,26 @@ var summarizeMoodTable = function (el) {
     recursiveElSearch(tenseElPredicate)
   );
 
-  return R.assoc(
-    extractTitle(el),
-    R.pipe(
+  var summarizeTenseTables = R.pipe(
       getTenseTables,
       R.map(summarizeTenseTable),
       R.reduce(R.merge, {})
-    )(el),
+    );
+
+  return R.assoc(
+    extractTitle(el),
+    summarizeTenseTables(el),
     {}
   );
 };
 
+var summarizePage = R.pipe(
+  recursiveElSearch(moodElPredicate),
+  R.map(summarizeMoodTable),
+  R.reduce(R.merge, {})
+);
+
 domFromHtml(moodHtml).
-then(R.head).
-then(summarizeMoodTable).
-then(R.curry(JSON.stringify)(R.__, null, 2)).
+then(summarizePage).
 then(console.log);
 
