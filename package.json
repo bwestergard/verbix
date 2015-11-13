@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Conjugate in many languages with verbix.com.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bwestergard/verbix.org"
+  },
   "scripts": {
     "test": "mocha",
     "coverage": "istanbul cover node_modules/.bin/_mocha",
