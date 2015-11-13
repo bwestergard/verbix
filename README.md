@@ -31,7 +31,7 @@ Disclaimers
 
 I am not affiliated with the maintainers of `verbix.com`. Screenscraping has been an expedient for my study of German with [Anki](http://ankisrs.net/); but it be forewarned: it is an inherently fragile approach. I have an incentive to keep it working for German for the next few years, but other than that you shouldn't expect much.
 
-If I make ansome effort to ensure the tables for other languages are parsed properly, it will likely be half-hearted and infrequent.
+If I make an effort to ensure the tables for other languages are parsed properly, it will likely be half-hearted and infrequent.
 
 License
 --------
