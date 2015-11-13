@@ -17,7 +17,7 @@ var extractTitle = R.pipe(
   R.find(R.propEq('type','text')),
   R.prop('data'),
   function (t) {
-    return t.replace(/\s+/g, '');
+    return t.replace(/\s+/g, '_');
   },
   R.toLower
 );
@@ -29,12 +29,12 @@ var extractTenseTables = R.pipe(
   R.filter(R.propEq('name','div'))
 );
 
-// Given an array of dom elements, find spans recursively
-var getSpans = function (elements) {
+// recursive search of element array
+var recursiveElementSearch = R.curry(function (predicate, elements) {
   return R.pipe(
     R.map(
       R.cond([
-        [R.propEq('name', 'span'), R.identity],
+        [predicate, R.identity],
         [R.T, R.pipe(
           R.prop('children'),
           R.defaultTo([]),
@@ -44,7 +44,10 @@ var getSpans = function (elements) {
     ),
     R.unnest
   )(elements);
-};
+});
+
+// Given an array of dom elements, find spans recursively
+var getSpans = recursiveElementSearch(R.propEq('name', 'span'));
 
 // https://github.com/ramda/ramda/issues/1515
 var splitOn = R.curry(function (predicate, arr) {
