@@ -1,6 +1,6 @@
 {
   "name": "verbix",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Conjugate in many languages with verbix.com.",
   "main": "index.js",
   "repository": {
