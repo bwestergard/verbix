@@ -12,7 +12,7 @@ Conjugate verbs in a variety of languages. The next best thing to a proper API, 
 Usage
 ------
 
-Exports one method, `conjugate`, which takes [a language](http://www.verbix.com/languages/) as the first argument and [a verb infinitive](https://en.wikipedia.org/wiki/Infinitive) as the second. It returns a [promise](https://promisesaplus.com/) for a plain javascript object with of the structure `obj[mood][tense][pronoun]` (e.g. `indicative.present.ich`). The terminal elements are arrays, as in some languages there are multiple conjugations for a given mood/tense/pronoun combination.
+Exports one method, `conjugate`, which takes [a language](http://www.verbix.com/languages/) as the first argument and [a verb infinitive](https://en.wikipedia.org/wiki/Infinitive) as the second. It returns a [promise](https://promisesaplus.com/) for a plain javascript object with the structure `obj[mood][tense][pronoun]` (e.g. `indicative.present.ich`). The terminal elements are arrays, as in some languages there are multiple conjugations for a given mood/tense/pronoun combination.
 
 ```javascript
 require('verbix').
