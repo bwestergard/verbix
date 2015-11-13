@@ -4,7 +4,10 @@
   "description": "Conjugate in many languages with verbix.com.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "coverage": "istanbul cover node_modules/.bin/_mocha",
+    "lint": "standard",
+    "check": "npm run coverage; npm run lint;"
   },
   "keywords": [
     "verbix",
@@ -27,6 +30,8 @@
     "ramda": "^0.18.0"
   },
   "devDependencies": {
-    "mocha": "^2.3.3"
+    "istanbul": "^0.4.0",
+    "mocha": "^2.3.3",
+    "standard": "^5.3.1"
   }
 }
