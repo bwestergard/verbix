@@ -5,15 +5,17 @@ var domFromHtml = require('./parse');
 
 var moodHtml = fs.readFileSync('./sample_mood.html', 'utf8');
 
+var getChildren = R.propOr([], 'children');
+
 var extractTitle = R.pipe(
-  R.prop('children'),
+  getChildren,
   R.find(
     R.pipe(
       R.prop('name'),
       R.contains(R.__, ['h1', 'h2','h3'])
     )
   ),
-  R.prop('children'),
+  getChildren,
   R.find(R.propEq('type','text')),
   R.prop('data'),
   function (t) {
@@ -23,22 +25,21 @@ var extractTitle = R.pipe(
 );
 
 var extractTenseTables = R.pipe(
-  R.prop('children'),
+  getChildren,
   R.find(R.propEq('name','div')),
-  R.prop('children'),
+  getChildren,
   R.filter(R.propEq('name','div'))
 );
 
 // recursive search of element array
-var recursiveElementSearch = R.curry(function (predicate, elements) {
+var recursiveElSearch = R.curry(function (predicate, elements) {
   return R.pipe(
     R.map(
       R.cond([
         [predicate, R.identity],
         [R.T, R.pipe(
-          R.prop('children'),
-          R.defaultTo([]),
-          getSpans
+          getChildren,
+          recursiveElSearch(predicate)
         )]
       ])
     ),
@@ -47,7 +48,7 @@ var recursiveElementSearch = R.curry(function (predicate, elements) {
 });
 
 // Given an array of dom elements, find spans recursively
-var getSpans = recursiveElementSearch(R.propEq('name', 'span'));
+var getSpans = recursiveElSearch(R.propEq('name', 'span'));
 
 // https://github.com/ramda/ramda/issues/1515
 var splitOn = R.curry(function (predicate, arr) {
@@ -61,7 +62,7 @@ var splitOn = R.curry(function (predicate, arr) {
 });
 
 var extractTextFromSpan = R.pipe(
-  R.prop('children'),
+  getChildren,
   // A text element is the span's only child
   R.head,
   R.prop('data'),
@@ -82,10 +83,10 @@ var splitDoublePronouns = function (rows) {
 
 var summarizeTenseTable = function (el) {
   var getPronounConjugationMap = R.pipe(
-    R.prop('children'),
+    getChildren,
     // The rows are enclosed in a <p></p>
-    R.find(R.propEq('name','p')),
-    R.prop('children'),
+    R.find(R.propEq('name','p')),    
+    getChildren,
     // The rows are separated by brs
     splitOn(R.propEq('name', 'br')),
     // There are font tags around some of the spans
@@ -100,11 +101,21 @@ var summarizeTenseTable = function (el) {
   return R.assoc(extractTitle(el), getPronounConjugationMap(el), {});
 };
 
-domFromHtml(moodHtml).then(
+var tenseElPredicate = R.pipe(
+  R.path(['attribs', 'class']),
+  // Totally magic string
+  R.equals('pure-u-1-1 pure-u-lg-1-2')
+);
+
+domFromHtml(moodHtml)./*.then(
   R.pipe(
     R.head,
     extractTenseTables,    
     R.map(summarizeTenseTable),
     R.reduce(R.merge, {})
   )
-).then(console.log);
+)*/
+then(R.head).
+then(summarizeTenseTable).
+then(console.log);
+
