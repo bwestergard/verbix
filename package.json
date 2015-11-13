@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bwestergard/verbix.org"
+    "url": "https://github.com/bwestergard/verbix"
   },
   "scripts": {
     "test": "mocha",
